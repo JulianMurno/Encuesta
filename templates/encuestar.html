@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ encuesta.titulo }} - Encuesta</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+    <h1>{{ encuesta.titulo }}</h1>
+    <form method="POST">
+        {% for pregunta in preguntas %}
+            <div class="question">
+                <p>{{ pregunta.pregunta }}</p>
+                <input type="text" name="{{ pregunta.id }}" placeholder="Tu respuesta" required>
+            </div>
+        {% endfor %}
+        <button type="submit">Enviar respuestas</button>
+    </form>
+
+    <a href="{{ url_for('index') }}">Volver a la lista de encuestas</a>
+
+</body>
+</html>

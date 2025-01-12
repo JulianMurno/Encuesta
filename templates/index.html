@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuestas Activas</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Encuestas Activas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Fecha de Fin</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for encuesta in encuestas %}
+            <tr>
+                <td>{{ encuesta.id }}</td>
+                <td>{{ encuesta.titulo }}</td>
+                <td>{{ encuesta.fecha_fin }}</td>
+                <td>
+                    <a href="{{ url_for('encuesta', encuesta_id=encuesta.id) }}" class="btn">Ver Encuesta</a>
+                    <a href="{{ url_for('resultados', encuesta_id=encuesta.id) }}" class="btn">Ver Resultados</a>
+                    <a class="btn" href="{{ url_for('realizar_encuesta', encuesta_id=encuesta.id) }}">Dar mi voto</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No hay encuestas activas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

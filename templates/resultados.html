@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Encuesta</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+    <h1>Resultados de la Encuesta</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {% for pregunta in preguntas %}
+                    <th>PREGUNTA {{ pregunta.id }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% set max_respuestas = preguntas|map(attribute='id')|map('int')|max %}
+            {% for i in range(max_respuestas) %}
+                <tr>
+                    {% for pregunta in preguntas %}
+                        <td>
+                            {% if respuestas[pregunta.id] and i < respuestas[pregunta.id]|length %}
+                                {{ respuestas[pregunta.id][i]['respuesta'] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('index') }}">Volver a la lista de encuestas</a>
+
+</body>
+</html>
